@@ -1,0 +1,248 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Cruise {
+  id              String   @id @default(uuid())
+  name            String?
+  route           String?
+  description     String?
+  
+  nameEn          String
+  nameAr          String
+  routeEn         String
+  routeAr         String
+  descriptionEn   String
+  descriptionAr   String
+  
+  image           String
+  duration        String
+  rating          Float
+  price           Float
+  
+  amenities       String[]
+  tags            String[]
+  deckPlans       String[]
+  cabinVideos     String[]
+  
+  // Trip Information
+  meetingPointEn  String?
+  meetingPointAr  String?
+  endingPointEn   String?
+  endingPointAr   String?
+  checkIn         String?
+  checkOut        String?
+  groupSizeEn     String?
+  groupSizeAr     String?
+  
+  itinerary       Json     // Array of itinerary items
+  gallery         Json     // Array of gallery items
+  cabinTypes      Json     // Array of cabin types
+  
+  bookings        Booking[]
+  commissions     Commission[]
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Booking {
+  id               String   @id @default(uuid())
+  userId           String?
+  user             User?    @relation(fields: [userId], references: [id])
+  itemType         String   @default("CRUISE") // CRUISE, HOTEL, FLIGHT, TOUR, TRANSFER
+  itemName         String?  
+
+  cruiseId         String?
+  cruise           Cruise?   @relation(fields: [cruiseId], references: [id])
+  cruiseName       String?
+
+  hotelId          String?
+  hotel            Hotel?    @relation(fields: [hotelId], references: [id])
+  
+  tourId           String?
+  tour             Tour?     @relation(fields: [tourId], references: [id])
+  
+  transferId       String?
+  transfer         Transfer? @relation(fields: [transferId], references: [id])
+  name             String
+  email            String
+  phone            String
+  date             DateTime
+  guests           Int
+  status           String   @default("pending") // pending, confirmed, cancelled
+  
+  confirmationCode String?  @unique
+  paymentStatus    String   @default("pending") // pending, paid, failed, refunded
+  transactionId    String?
+  paymentMethod    String?
+  totalAmount      Float?
+  currency         String   @default("USD")
+  paidAmount       Float?
+  notes            String?
+  
+  commissions      Commission[]
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  @db.Text
+  access_token       String?  @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  @db.Text
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  role          String    @default("user")
+  accounts      Account[]
+  sessions      Session[]
+  bookings      Booking[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Commission {
+  id               String   @id @default(uuid())
+  partnerId        String
+  bookingId        String
+  booking          Booking  @relation(fields: [bookingId], references: [id])
+  cruiseId         String?
+  cruise           Cruise?  @relation(fields: [cruiseId], references: [id])
+  
+  amount           Float
+  commissionRate   Float    @default(10)
+  commissionAmount Float
+  currency         String   @default("USD")
+  status           String   @default("pending") // pending, approved, paid, cancelled
+  paymentDate      DateTime?
+  notes            String?
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Hotel {
+  id              String   @id @default(uuid())
+  nameEn          String
+  nameAr          String
+  descriptionEn   String
+  descriptionAr   String
+  locationEn      String
+  locationAr      String
+  
+  images          String[]
+  rating          Float    @default(0)
+  amenities       String[]
+  pricePerNight   Float
+  currency        String   @default("USD")
+  address         String
+  city            String
+  country         String   @default("Egypt")
+  
+  lat             Float?
+  lng             Float?
+  starRating      Int
+
+  bookings        Booking[]
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Tour {
+  id              String   @id @default(uuid())
+  nameEn          String
+  nameAr          String
+  descriptionEn   String
+  descriptionAr   String
+  
+  images          String[]
+  duration        String
+  durationHours   Float
+  price           Float
+  currency        String   @default("USD")
+  category        String   // historical, adventure, cultural, leisure, photography
+  locationEn      String
+  locationAr      String
+  
+  itinerary       Json     // Array of itinerary objects
+  includes        String[]
+  excludes        String[]
+  meetingPointEn  String
+  meetingPointAr  String
+  available       Boolean  @default(true)
+  maxParticipants Int      @default(20)
+  rating          Float    @default(0)
+
+  bookings        Booking[]
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Transfer {
+  id              String   @id @default(uuid())
+  nameEn          String
+  nameAr          String
+  descriptionEn   String
+  descriptionAr   String
+  
+  fromLocationEn  String
+  fromLocationAr  String
+  toLocationEn    String
+  toLocationAr    String
+  
+  type            String   // airport, hotel, port, custom
+  vehicleType     String   // sedan, van, bus, luxury
+  capacity        Int
+  price           Float
+  currency        String   @default("USD")
+  duration        Int      // in minutes
+  image           String?
+  available       Boolean  @default(true)
+
+  bookings        Booking[]
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
