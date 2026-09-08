@@ -200,7 +200,7 @@ export default async function HotelDetailPage({ params }: { params: Promise<{ id
           </div>
 
           {/* Right Column (Sticky Booking Sidebar) */}
-          <div className="w-full lg:w-[380px] shrink-0">
+          <div className="hidden md:flex w-full lg:w-[380px] shrink-0">
             <div className="bg-white rounded-2xl border border-gray-200 shadow-xl p-6 lg:sticky lg:top-28">
               
               <div className="flex justify-between items-end mb-6">

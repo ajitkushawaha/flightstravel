@@ -4,6 +4,7 @@ import { Suspense } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { HotelFilters } from "@/components/hotel-filters"
+import { MobileHotelFilters } from "@/components/mobile-hotel-filters"
 import { useSearchParams } from "next/navigation"
 import { Calendar as CalendarIcon, MapPin, Users, Star, Bed, Wifi, Car, Tv, Bath } from "lucide-react"
 import Image from "next/image"
@@ -72,7 +73,11 @@ function HotelSearchContent() {
         <div className="flex flex-col lg:flex-row gap-8">
           
           {/* Left Sidebar: Filters */}
-          <HotelFilters />
+          <div className="hidden lg:block">
+            <HotelFilters />
+          </div>
+
+          <MobileHotelFilters />
 
           {/* Right Content: Hotel Results */}
           <div className="flex-1">

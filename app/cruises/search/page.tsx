@@ -4,6 +4,7 @@ import { Suspense } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { CruiseFilters } from "@/components/cruise-filters"
+import { MobileCruiseFilters } from "@/components/mobile-cruise-filters"
 import { useSearchParams } from "next/navigation"
 import { Calendar as CalendarIcon, MapPin, Users, Star, Ship } from "lucide-react"
 import Image from "next/image"
@@ -63,7 +64,11 @@ function CruiseSearchContent() {
         <div className="flex flex-col lg:flex-row gap-8">
           
           {/* Left Sidebar: Filters */}
-          <CruiseFilters />
+          <div className="hidden lg:block">
+            <CruiseFilters />
+          </div>
+
+          <MobileCruiseFilters />
 
           {/* Right Content: Cruise Results */}
           <div className="flex-1">
