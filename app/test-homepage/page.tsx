@@ -824,9 +824,9 @@ export default function TestHomepage() {
                         <span>{pkg.location}</span>
                       </div>
                     </div>
-                    <button className="bg-[#ff7a50] text-white text-[12px] font-medium px-4 py-2 rounded-full hover:bg-[#e06640] transition-colors flex items-center gap-1">
+                    <Link href="#overview" className="bg-[#ff7a50] text-white text-[12px] font-medium px-4 py-2 rounded-full hover:bg-[#e06640] transition-colors flex items-center gap-1">
                       Book now <ChevronRight className="h-3 w-3" />
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -866,9 +866,9 @@ export default function TestHomepage() {
                   Save <span className="text-[#ff7a50]">20%</span> on Europe / USA
                   <br />Tours.
                 </h3>
-                <button className="bg-[#ff7a50] text-white text-[13px] font-medium px-6 py-3 rounded-full hover:bg-[#e06640] transition-colors flex items-center gap-2 w-fit">
+                <Link href="#overview" className="bg-[#ff7a50] text-white text-[13px] font-medium px-6 py-3 rounded-full hover:bg-[#e06640] transition-colors flex items-center gap-2 w-fit">
                   Book now <ChevronRight className="h-3.5 w-3.5" />
-                </button>
+                </Link>
               </div>
               <Image
                 src="/world_collage.png"
@@ -894,9 +894,9 @@ export default function TestHomepage() {
                 {/* <span className="text-white/90 text-xs font-medium tracking-wide">Jun 15 - July 29, 2025</span> */}
                 <h3 className="text-white font-bold text-2xl md:text-3xl leading-snug mb-1">Luxury Safari in Kenya</h3>
                 <p className="text-white font-medium mb-5 text-sm">Buy 1 Get 1 50% Off</p>
-                <button className="bg-white text-[#ff7a50] text-[13px] font-bold px-5 py-2.5 rounded-full hover:bg-gray-50 transition-colors flex items-center justify-center gap-1 w-fit shadow-lg">
+                <Link href="#overview" className="bg-white text-[#ff7a50] text-[13px] font-bold px-5 py-2.5 rounded-full hover:bg-gray-50 transition-colors flex items-center justify-center gap-1 w-fit shadow-lg">
                   Book now <ChevronRight className="h-3.5 w-3.5" />
-                </button>
+                </Link>
               </div>
 
               {/* Image absolute on left/center */}

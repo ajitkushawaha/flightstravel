@@ -21,7 +21,7 @@ const getIcon = (name: string) => {
 
 export default async function HotelDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  
+
   const hotel = getHotelById(id)
 
   if (!hotel) {
@@ -49,7 +49,7 @@ export default async function HotelDetailPage({ params }: { params: Promise<{ id
   return (
     <main className="min-h-screen bg-[#fafbfc] font-sans">
       <Header />
-      
+
       {/* Breadcrumbs */}
       <div className="pt-24 pb-4 container max-w-[1200px] mx-auto px-4">
         <div className="flex items-center text-sm text-gray-500 gap-2">
@@ -62,7 +62,7 @@ export default async function HotelDetailPage({ params }: { params: Promise<{ id
       </div>
 
       <div className="container max-w-[1200px] mx-auto px-4 pb-20">
-        
+
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-6">
           <div>
@@ -93,19 +93,19 @@ export default async function HotelDetailPage({ params }: { params: Promise<{ id
 
         {/* Two Column Layout */}
         <div className="flex flex-col lg:flex-row gap-8">
-          
+
           {/* Left Column (Main Details) */}
           <div className="flex-1 space-y-10">
-            
+
             {/* Image Slider */}
             <HotelGallery images={gallery} />
-            
+
             {/* About Section */}
             <section>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">About this property</h2>
               <div className="text-gray-600 leading-relaxed space-y-4">
                 <p>
-                  Experience unparalleled luxury at {hotel.title}, perfectly situated in the heart of {hotel.location.split(',')[0]}. 
+                  Experience unparalleled luxury at {hotel.title}, perfectly situated in the heart of {hotel.location.split(',')[0]}.
                   This premium property offers stunning views, world-class amenities, and impeccable service tailored to meet the needs of both leisure and business travelers.
                 </p>
                 <p>
@@ -130,7 +130,7 @@ export default async function HotelDetailPage({ params }: { params: Promise<{ id
             {/* Mock Room Selection */}
             <section>
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Choose your room</h2>
-              
+
               <div className="space-y-6">
                 {/* Room Option 1 */}
                 <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm flex flex-col md:flex-row">
@@ -202,7 +202,7 @@ export default async function HotelDetailPage({ params }: { params: Promise<{ id
           {/* Right Column (Sticky Booking Sidebar) */}
           <div className="hidden md:flex w-full lg:w-[380px] shrink-0">
             <div className="bg-white rounded-2xl border border-gray-200 shadow-xl p-6 lg:sticky lg:top-28">
-              
+
               <div className="flex justify-between items-end mb-6">
                 <div>
                   {hotel.originalPrice && (
@@ -229,7 +229,7 @@ export default async function HotelDetailPage({ params }: { params: Promise<{ id
                   Reserve Now
                 </button>
               </Link>
-              
+
               <div className="text-center text-sm text-gray-500 font-medium">
                 You won't be charged yet
               </div>
