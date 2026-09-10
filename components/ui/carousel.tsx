@@ -22,7 +22,7 @@ const Slide = ({ slide, index, current, handleSlideClick, cardSize = "70vmin" }:
 
   const xRef = useRef(0);
   const yRef = useRef(0);
-  const frameRef = useRef<number>();
+  const frameRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const animate = () => {
