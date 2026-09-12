@@ -2,150 +2,85 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Menu, X, User, ChevronDown, Settings, CreditCard, LogOut, Globe } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useLanguage } from "@/components/i18n/LanguageProvider"
-import { useSession, signIn, signOut } from "next-auth/react"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import Image from "next/image"
+import { Menu, X } from "lucide-react"
 
 export function Header() {
-  const [isOpen, setIsOpen] = useState(false)
-  const { t, isRTL } = useLanguage()
-  const { data: session, status } = useSession()
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
-      <div className="container max-w-[1200px] mx-auto px-4">
-        <div className={`flex items-center justify-between h-20 ${isRTL ? 'flex-row-reverse' : ''}`}>
-          
-          {/* Logo */}
-          <Link href="/" className={`flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
-            {/* Using a placeholder text for logo to match Flights.Travel styling */}
-            <div className="flex items-center">
-             
-              <Image src="/logo.png" alt="Logo" width={200} height={50} />
-            </div>
+    <header className="absolute top-0 left-0 right-0 z-50">
+      <div className="flex items-center justify-between">
+        {/* Logo Container with White Cutout */}
+        <div className="relative bg-white h-24 flex items-center pl-8 pr-12 md:pr-16 rounded-br-[40px]">
+          <Link href="/" className="flex items-center gap-2 relative z-10">
+            <Image
+              src="/logo.png"
+              alt="FlightsTravels"
+              width={180}
+              height={45}
+              className="w-auto h-auto"
+            />
           </Link>
-
-         
-
-          {/* Right Section (Trustpilot + Actions) */}
-          <div className={`flex items-center gap-6 ${isRTL ? 'flex-row-reverse' : ''}`}>
-            
-            {/* Trustpilot Badge */}
-            <div className="hidden xl:flex flex-col items-center">
-              <div className="flex items-center gap-1">
-                <span className="text-green-500 font-bold text-xl">★</span>
-                <span className="font-bold text-lg tracking-tight">Trustpilot</span>
-                <div className="flex gap-0.5 ml-1">
-                  {[1,2,3,4,5].map(i => (
-                    <div key={i} className="w-5 h-5 bg-green-500 flex items-center justify-center">
-                      <span className="text-white text-sm">★</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <span className="text-[10px] text-gray-500 mt-0.5">4.8/5 (12k+ reviews)</span>
-            </div>
-
-            {/* User Actions */}
-            <div className="flex items-center gap-3">
-              {/* Account Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <button className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 overflow-hidden">
-                    {status === "authenticated" && session?.user?.image ? (
-                      <Image 
-                        src={session.user.image} 
-                        alt={session.user.name || "User"} 
-                        width={40} 
-                        height={40} 
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <User className="h-5 w-5" />
-                    )}
-                  </button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56">
-                  {status === "authenticated" ? (
-                    <>
-                      <DropdownMenuLabel className="font-normal">
-                        <div className="flex flex-col space-y-1">
-                          <p className="text-sm font-medium leading-none">{session?.user?.name}</p>
-                          <p className="text-xs leading-none text-muted-foreground">
-                            {session?.user?.email}
-                          </p>
-                        </div>
-                      </DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem asChild className="cursor-pointer">
-                        <Link href="/my-bookings" className="flex items-center">
-                          <CreditCard className="mr-2 h-4 w-4" />
-                          <span>My Bookings</span>
-                        </Link>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem asChild className="cursor-pointer">
-                        <Link href="/settings" className="flex items-center">
-                          <Settings className="mr-2 h-4 w-4" />
-                          <span>Settings</span>
-                        </Link>
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem 
-                        onClick={() => signOut()} 
-                        className="cursor-pointer text-red-600 focus:text-red-600 focus:bg-red-50"
-                      >
-                        <LogOut className="mr-2 h-4 w-4" />
-                        <span>Log out</span>
-                      </DropdownMenuItem>
-                    </>
-                  ) : (
-                    <>
-                      <DropdownMenuLabel>Welcome</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={() => signIn()} className="cursor-pointer">
-                        <User className="mr-2 h-4 w-4" />
-                        <span>Log in / Sign up</span>
-                      </DropdownMenuItem>
-                    </>
-                  )}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            
-              {/* Mobile Menu Toggle */}
-              <button 
-                className="lg:hidden w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-colors"
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-              </button>
-            </div>
-          </div>
+          {/* Top-Right Curve (Connecting to Hero Top Edge) */}
+          <svg className="absolute -right-10 top-2 w-10 h-10 fill-white" viewBox="0 0 40 40">
+            <path d="M0 0 H40 C17.9086 0 0 17.9086 0 40 V0 Z" />
+          </svg>
+          {/* Bottom-Left Curve (Connecting to Hero Left Edge) */}
+          <svg className="absolute left-2 -bottom-10 w-10 h-10 fill-white" viewBox="0 0 40 40">
+            <path d="M0 0 H40 C17.9086 0 0 17.9086 0 40 V0 Z" />
+          </svg>
         </div>
 
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="lg:hidden py-4 border-t border-gray-100 bg-white">
-            <nav className="flex flex-col gap-4 px-2">
-              <Link href="/" className="text-sm font-bold text-blue-500">Home</Link>
-              <Link href="/flights" className="text-sm font-semibold text-gray-700">Flights</Link>
-              <Link href="/hotels" className="text-sm font-semibold text-gray-700">Hotels</Link>
-              <Link href="/cruises" className="text-sm font-semibold text-gray-700">Cruises</Link>
-              <Link href="/holidays" className="text-sm font-semibold text-gray-700">Holidays</Link>
-            </nav>
-          </div>
-        )}
+        <nav className="hidden lg:flex items-center gap-2 mr-auto ml-12">
+          {[
+            { label: "Home", href: "/" },
+            { label: "About us", href: "#" },
+            { label: "Destinations", href: "#destinations" },
+            { label: "Offers", href: "#" },
+            { label: "Testimonials", href: "#" },
+            { label: "Blog", href: "#" },
+          ].map((item, i) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              className={`text-sm font-medium px-4 py-2 rounded-full transition-all duration-300 ${i === 0 ? "bg-white/20 text-white" : "text-white/80 hover:text-white hover:bg-white/10"
+                }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Right — Generic CTA */}
+        <div className="flex items-center gap-3 pr-8">
+          <Link
+            href="#"
+            className="hidden sm:flex items-center gap-2 px-6 py-2.5 bg-linear-to-r from-[#ff6b00] to-[#ff8c38] text-white text-sm font-semibold rounded-full hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
+          >
+            Contact us
+          </Link>
+          <button
+            className="lg:hidden w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden py-4 border-t border-gray-100 bg-white animate-tabIn">
+          <nav className="flex flex-col gap-4 px-2">
+            {["Home", "Flights", "Hotels", "Cruises", "Destinations", "Packages"].map((item) => (
+              <Link key={item} href={`/${item.toLowerCase()}`} className="text-sm font-semibold text-gray-700 hover:text-[#1a73e8]">
+                {item}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      )}
     </header>
   )
 }

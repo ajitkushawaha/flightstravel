@@ -11,6 +11,7 @@ import {
 } from "lucide-react"
 import { WanderluxSearchWidget } from "@/components/wanderlux-search-widget"
 import Globe3DDemo from "@/components/3d-globe-demo"
+import { Header } from "@/components/header"
 
 /* ─────────────────────── COUNTER HOOK ─────────────────────── */
 function useCountUp(end: number, duration = 2000, startOnView = true) {
@@ -302,85 +303,10 @@ export default function TestHomepage() {
   return (
     <main className="min-h-screen bg-[#faf9f7] text-[#1a1a1a] overflow-x-clip">
       {/* ═══════════════════ HEADER ═══════════════════ */}
-      <header className="absolute top-0 left-0 right-0 z-50">
-        <div className="flex items-center justify-between">
-          {/* Logo Container with White Cutout */}
-          <div className="relative bg-white h-24 flex items-center pl-8 pr-12 md:pr-16 rounded-br-[40px]">
-            <Link href="/test-homepage" className="flex items-center gap-2 relative z-10">
-              <Image
-                src="/logo.png"
-                alt="FlightsTravels"
-                width={180}
-                height={45}
-                className="w-auto h-auto"
-              />
-            </Link>
-            {/* Top-Right Curve (Connecting to Hero Top Edge) */}
-            <svg className="absolute -right-10 top-2 w-10 h-10 fill-white" viewBox="0 0 40 40">
-              <path d="M0 0 H40 C17.9086 0 0 17.9086 0 40 V0 Z" />
-            </svg>
-            {/* Bottom-Left Curve (Connecting to Hero Left Edge) */}
-            <svg className="absolute left-2 -bottom-10 w-10 h-10 fill-white" viewBox="0 0 40 40">
-              <path d="M0 0 H40 C17.9086 0 0 17.9086 0 40 V0 Z" />
-            </svg>
-          </div>
-
-          <nav className="hidden lg:flex items-center gap-2 mr-auto ml-12">
-            {[
-              { label: "Home", href: "/test-homepage" },
-              { label: "About us", href: "#" },
-              { label: "Destinations", href: "#destinations" },
-              { label: "Offers", href: "#" },
-              { label: "Testimonials", href: "#" },
-              { label: "Blog", href: "#" },
-            ].map((item, i) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className={`text-sm font-medium px-4 py-2 rounded-full transition-all duration-300 ${i === 0 ? "bg-white/20 text-white" : "text-white/80 hover:text-white hover:bg-white/10"
-                  }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Right — Generic CTA */}
-          <div className="flex items-center gap-3 pr-8">
-            <button className="flex items-center gap-2 bg-white rounded-full px-4 py-2 text-sm font-semibold text-[#1a1a2e]">
-              🇬🇧 EN
-            </button>
-            <Link
-              href="#"
-              className="hidden sm:flex items-center gap-2 px-6 py-2.5 bg-linear-to-r from-[#ff6b00] to-[#ff8c38] text-white text-sm font-semibold rounded-full hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
-            >
-              Contact us
-            </Link>
-            <button
-              className="lg:hidden w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-gray-100 bg-white animate-tabIn">
-            <nav className="flex flex-col gap-4 px-2">
-              {["Home", "Flights", "Hotels", "Cruises", "Destinations", "Packages"].map((item) => (
-                <Link key={item} href={`/${item.toLowerCase()}`} className="text-sm font-semibold text-gray-700 hover:text-[#1a73e8]">
-                  {item}
-                </Link>
-              ))}
-            </nav>
-          </div>
-        )}
-      </header>
+      <Header />
 
       {/* ═══════════════════ 1. HERO SECTION — WANDERLUX STYLE ═══════════════════ */}
-      <section id="overview" className="relative pt-24 overflow-hidden flex flex-col justify-center bg-white" style={{ minHeight: "100vh" }}>
+      <section id="overview" className="relative pt-20 md:pt-24 overflow-hidden flex flex-col justify-center bg-white" style={{ minHeight: "100vh" }}>
         {/* Full Bleed Background Image */}
         <div className="absolute top-2 bottom-2 left-2 right-2 rounded-2xl md:rounded-4xl overflow-hidden">
           <Image
@@ -396,20 +322,19 @@ export default function TestHomepage() {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-20 max-w-[1200px] w-full mx-auto px-4 lg:px-6 pt-4 md:pt-8 pb-4 md:pb-6">
-          <div className="flex flex-col md:flex-row justify-between items-start gap-6 md:gap-8">
+        <div className="relative z-20 max-w-[1200px] w-full mx-auto px-4 lg:px-6 pt-0 md:pt-8 pb-0 md:pb-6">
+          <div className="flex flex-col md:flex-row justify-between items-start gap-2 md:gap-8">
             {/* Left — Heading */}
-            <div className="w-full md:w-[65%] shrink-0">
+            <div className="w-full md:w-[65%] shrink-0 mt-2 md:mt-0">
               <h1
-                className="font-serif text-5xl md:text-5xl lg:text-[4.5rem] font-bold text-white leading-[1.1] mb-2 md:mb-4 tracking-tight"
+                className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[4.5rem] font-bold text-white leading-tight md:leading-[1.1] mb-1 md:mb-4 tracking-tight text-center md:text-left"
                 style={{
                   opacity: heroLoaded ? 1 : 0,
                   transform: heroLoaded ? "translateY(0)" : "translateY(30px)",
                   transition: "all 1s ease 0.3s",
                 }}
               >
-                Discover Your<br />
-                Dream Destination.
+                Discover Your<br className="hidden md:block" /> Dream Destination.
               </h1>
             </div>
 
@@ -419,7 +344,7 @@ export default function TestHomepage() {
 
         {/* ───── SEARCH FORM ───── */}
         <div
-          className="relative z-30 w-full max-w-[1200px] mx-auto px-4 lg:px-6 mt-10 md:mt-20 pb-4 md:pb-8"
+          className="relative z-30 w-full max-w-[1200px] mx-auto px-2 md:px-4 lg:px-6 mt-4 md:mt-20 pb-2 md:pb-8"
           style={{
             opacity: heroLoaded ? 1 : 0,
             transform: heroLoaded ? "translateY(0)" : "translateY(40px)",
@@ -453,7 +378,7 @@ export default function TestHomepage() {
 
             <div className="lg:col-span-8">
               <h2
-                className="font-serif text-xl leading-[1.3] text-[#0a192f] font-medium"
+                className="font-serif text-base md:text-xl leading-[1.3] text-[#0a192f] font-medium"
                 style={{
                   opacity: exploreReveal.isVisible ? 1 : 0,
                   transform: exploreReveal.isVisible ? "translateY(0)" : "translateY(30px)",
@@ -491,7 +416,7 @@ export default function TestHomepage() {
                   <div className="text-[10px] sm:text-xs text-gray-500 font-medium">Experienced guides</div>
                 </div>
               </div>
-              <p className="text-xs sm:text-xl text-[#0a192f] leading-relaxed max-w-sm mb-6 lg:mb-8 font-medium">
+              <p className="text-base md:text-xl text-[#0a192f] leading-relaxed max-w-sm mb-6 lg:mb-8 font-medium">
                 <ScrollRevealText text="Founded by passionate explorers, Flights Travel specializes in curating luxury vacations, adventure-packed getaways, and cultural immersions tailored to your unique preferences. From the hidden gems of remote islands to the vibrant streets of iconic cities, we ensure every detail is handled with precision and care." />
               </p>
             </div>
@@ -609,7 +534,7 @@ export default function TestHomepage() {
           </button>
           <div ref={destinationCarouselRef} className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {destinations.slice(0, 6).map((destination) => (
-              <article key={destination.name} className="group min-w-[calc(100vw-2rem)] snap-center overflow-hidden rounded-[1.5rem] border border-gray-200 bg-white shadow-[0_20px_45px_rgba(15,23,42,0.08)] transition-transform duration-300 hover:-translate-y-2 sm:min-w-[calc(50%-0.625rem)] lg:min-w-[calc(33.333%-0.875rem)]">
+              <article key={destination.name} className="group min-w-[85vw] snap-center overflow-hidden rounded-[1.5rem] border border-gray-200 bg-white shadow-[0_20px_45px_rgba(15,23,42,0.08)] transition-transform duration-300 hover:-translate-y-2 sm:min-w-[calc(50%-0.625rem)] lg:min-w-[calc(33.333%-0.875rem)]">
                 <div className="relative h-52 overflow-hidden">
                   <Image
                     src={destination.image}
@@ -696,7 +621,7 @@ export default function TestHomepage() {
                     pointerEvents: isActive ? "auto" : "none",
                   }}
                 >
-                  <div className="grid h-full min-h-0 gap-3 md:grid-cols-[1.1fr_1.15fr] md:gap-4">
+                  <div className="grid h-full min-h-0 gap-3 grid-rows-[220px_1fr] md:grid-rows-none md:grid-cols-[1.1fr_1.15fr] md:gap-4">
                     <div className="relative min-h-0 overflow-hidden rounded-[1.25rem] md:order-2 md:rounded-[1.5rem]">
                     <Image src={experience.image} alt="" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" priority={index === 0} />
                     <div className="absolute inset-0 bg-linear-to-t from-[#0a192f] via-[#0a192f]/20 to-transparent md:bg-linear-to-r md:from-[#0a192f]/25 md:to-transparent" />
@@ -1265,7 +1190,7 @@ export default function TestHomepage() {
           {/* Nav Links */}
           <div className="flex flex-wrap justify-center gap-3 md:gap-6 py-6 border-t border-white/20">
             {[
-              { label: "Home", href: "/test-homepage" },
+              { label: "Home", href: "/" },
               { label: "About us", href: "#" },
               { label: "Destinations", href: "#destinations" },
               { label: "Offers", href: "#" },
@@ -1284,8 +1209,8 @@ export default function TestHomepage() {
         </div>
 
         {/* Giant Brand Name */}
-        <div className="px-6 md:px-10 overflow-hidden">
-          <div className="text-[clamp(80px,14vw,200px)] font-black leading-none text-white/95 tracking-tight select-none" style={{ lineHeight: 0.85 }}>
+        <div className="px-6 md:px-10 overflow-hidden text-center md:text-left">
+          <div className="text-[clamp(48px,12vw,200px)] font-black leading-none text-white/95 tracking-tight select-none" style={{ lineHeight: 0.85 }}>
             FlightsTravel
           </div>
         </div>
@@ -1363,20 +1288,20 @@ function NewsletterInlineForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex bg-white rounded-full overflow-hidden shadow-lg w-full max-w-md">
+    <form onSubmit={handleSubmit} className="flex bg-white rounded-full p-1 shadow-lg w-full max-w-md">
       <input
         type="email"
         placeholder="Enter your email..."
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
-        className="flex-1 px-6 py-4 text-gray-700 text-sm placeholder:text-gray-400 focus:outline-none bg-transparent"
+        className="flex-1 px-4 py-3 sm:px-6 sm:py-3 text-gray-700 text-sm placeholder:text-gray-400 focus:outline-none bg-transparent rounded-l-full min-w-0"
       />
       <button
         type="submit"
-        className="bg-[#ff7a50] text-white font-semibold px-6 py-4 text-sm flex items-center gap-1.5 hover:bg-[#e06640] transition-colors rounded-full m-1"
+        className="bg-[#ff7a50] text-white font-semibold px-5 sm:px-6 py-3 text-sm flex items-center justify-center gap-1.5 hover:bg-[#e06640] transition-colors rounded-full whitespace-nowrap shrink-0"
       >
-        Subscribe <ChevronRight className="h-4 w-4" />
+        Subscribe <ChevronRight className="h-4 w-4 hidden sm:block" />
       </button>
     </form>
   )
@@ -1481,7 +1406,7 @@ function StickyBottomNav() {
           className="group relative flex items-center justify-center gap-2 rounded-full px-4 py-2 text-left transition-colors text-neutral-400 hover:bg-white/10 hover:text-neutral-200"
         >
           {isExpanded ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-          <span className="max-w-36 truncate text-xs font-medium text-neutral-100 hidden sm:block">{isExpanded ? 'Close' : 'Menu'}</span>
+          <span className="max-w-36 truncate text-xs font-medium text-neutral-100">{isExpanded ? 'Close' : 'Menu'}</span>
         </button>
 
         {/* Separator */}
@@ -1506,7 +1431,7 @@ function StickyBottomNav() {
               <circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeDasharray={circumference} strokeDashoffset={dashoffset}></circle>
             </svg>
           </div>
-          <div className="min-w-0 flex-1 hidden sm:block">
+          <div className="min-w-0 flex-1">
             <div className="overflow-hidden">
               <p className="truncate text-xs font-medium text-neutral-100 whitespace-nowrap animate-fade-in" key={activeSection}>{activeSection}</p>
             </div>

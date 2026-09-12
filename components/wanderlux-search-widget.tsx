@@ -33,7 +33,6 @@ export function WanderluxSearchWidget() {
   const [isHotelDestOpen, setIsHotelDestOpen] = useState(false)
   const [isHotelGuestsOpen, setIsHotelGuestsOpen] = useState(false)
 
-  // Cruises State
   const [cruiseDest, setCruiseDest] = useState("Any Destination")
   const [cruiseDate, setCruiseDate] = useState<Date | undefined>(new Date(2025, 5, 1))
   const [cruisePassengers, setCruisePassengers] = useState("2")
@@ -88,25 +87,25 @@ export function WanderluxSearchWidget() {
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full flex flex-col gap-0">
         
         {/* ───── TOP TAB (Cutout Shape) ───── */}
-        <div className="relative w-[50%] bg-white/90 backdrop-blur-md rounded-t-3xl px-6 md:px-8 py-5 flex flex-col md:flex-row md:items-center gap-6 z-10">
-          <TabsList className="flex bg-white/50 p-1 rounded-full h-auto shadow-sm w-fit">
+        <div className="relative w-full md:w-[50%] md:bg-white/90 md:backdrop-blur-md md:rounded-t-3xl px-2 md:px-8 py-2 md:py-5 flex md:flex-row md:items-center z-10">
+          <TabsList className="flex w-full md:w-fit gap-2 md:gap-0 bg-transparent md:bg-white/50 p-0 md:p-1 rounded-none md:rounded-full h-auto shadow-none md:shadow-sm overflow-x-auto hide-scrollbar">
             <TabsTrigger 
               value="flights" 
-              className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium data-[state=active]:bg-[#ff6000] data-[state=active]:text-white data-[state=active]:shadow-md transition-all"
+              className="flex-1 md:flex-none flex flex-col md:flex-row items-center justify-center gap-1 md:gap-1.5 px-2 md:px-4 py-2 md:py-2 bg-white/60 md:bg-transparent backdrop-blur-md md:backdrop-blur-none rounded-xl md:rounded-full text-[12px] md:text-sm font-bold md:font-medium data-[state=active]:bg-[#ff6000] data-[state=active]:text-white shadow-sm md:shadow-none data-[state=active]:shadow-md transition-all border border-white/40 md:border-transparent"
             >
-              <Plane className="w-4 h-4" /> Flights
+              <Plane className="w-4 h-4 md:w-4 md:h-4" /> Flights
             </TabsTrigger>
             <TabsTrigger 
               value="hotels" 
-              className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium data-[state=active]:bg-amber-500 data-[state=active]:text-white data-[state=active]:shadow-md transition-all"
+              className="flex-1 md:flex-none flex flex-col md:flex-row items-center justify-center gap-1 md:gap-1.5 px-2 md:px-4 py-2 md:py-2 bg-white/60 md:bg-transparent backdrop-blur-md md:backdrop-blur-none rounded-xl md:rounded-full text-[12px] md:text-sm font-bold md:font-medium data-[state=active]:bg-amber-500 data-[state=active]:text-white shadow-sm md:shadow-none data-[state=active]:shadow-md transition-all border border-white/40 md:border-transparent"
             >
-              <Building2 className="w-4 h-4" /> Hotels
+              <Building2 className="w-4 h-4 md:w-4 md:h-4" /> Hotels
             </TabsTrigger>
             <TabsTrigger 
               value="cruises" 
-              className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium data-[state=active]:bg-rose-500 data-[state=active]:text-white data-[state=active]:shadow-md transition-all"
+              className="flex-1 md:flex-none flex flex-col md:flex-row items-center justify-center gap-1 md:gap-1.5 px-2 md:px-4 py-2 md:py-2 bg-white/60 md:bg-transparent backdrop-blur-md md:backdrop-blur-none rounded-xl md:rounded-full text-[12px] md:text-sm font-bold md:font-medium data-[state=active]:bg-rose-500 data-[state=active]:text-white shadow-sm md:shadow-none data-[state=active]:shadow-md transition-all border border-white/40 md:border-transparent"
             >
-              <Ship className="w-4 h-4" /> Cruises
+              <Ship className="w-4 h-4 md:w-4 md:h-4" /> Cruises
             </TabsTrigger>
           </TabsList>
 
@@ -116,44 +115,44 @@ export function WanderluxSearchWidget() {
             style={{ WebkitMaskImage: 'radial-gradient(circle at 100% 0%, transparent 24px, black 24.5px)' }}
           />
         </div>
-        {/* Floating Trip Type Selector for Flights */}
-        {activeTab === "flights" && (
-          <div className="absolute top-10 right-8 z-20 flex flex-col items-end gap-3 pointer-events-none">
-            <div className="flex items-center gap-4 bg-white/80 backdrop-blur-md px-4 py-2 rounded-full pointer-events-auto border border-white/30 shadow-sm">
-              <label className="flex items-center gap-1.5 cursor-pointer text-[13px] font-bold text-black/50 drop-shadow-md">
-                <input type="radio" name="tripType" value="roundTrip" checked={tripType === "roundTrip"} onChange={(e) => setTripType(e.target.value)} className="w-4 h-4 accent-[#ff6000]" />
-                Round Trip
-              </label>
-              <label className="flex not-even: items-center gap-1.5 cursor-pointer text-[13px] font-semibold text-black/50 hover:text-white transition-colors drop-shadow-md">
-                <input type="radio" name="tripType" value="oneWay" checked={tripType === "oneWay"} onChange={(e) => setTripType(e.target.value)} className="w-4 h-4 accent-[#ff6000]" />
-                One Way
-              </label>
-              <label className="flex items-center gap-1.5 cursor-pointer text-[13px] font-semibold text-black/50 hover:text-white transition-colors drop-shadow-md">
-                <input type="radio" name="tripType" value="multiCity" checked={tripType === "multiCity"} onChange={(e) => setTripType(e.target.value)} className="w-4 h-4 accent-[#ff6000]" />
-                Multi-City
-              </label>
-            </div>
-          </div>
-        )}
 
         {/* ───── BOTTOM BODY ───── */}
-        <div className="relative w-full bg-white/90 backdrop-blur-md rounded-b-3xl rounded-tr-3xl md:rounded-tl-none p-6  z-0">
+        <div className="relative w-full bg-white/90 backdrop-blur-md rounded-b-3xl rounded-tl-3xl rounded-tr-3xl md:rounded-tl-none p-6  z-0">
 
         {/* ───────────────── FLIGHTS TAB ───────────────── */}
         <TabsContent value="flights" className="mt-0 outline-none">
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4 md:gap-6">
+            
+            {/* Trip Type Selector */}
+            <div className="flex md:absolute md:-top-[68px] md:right-2 z-20 justify-start md:justify-end w-full md:w-auto">
+              <div className="flex flex-wrap items-center justify-between sm:justify-start gap-3 sm:gap-4 bg-white md:bg-white/80 backdrop-blur-md px-4 py-3 md:py-2 rounded-xl md:rounded-full pointer-events-auto border border-gray-200 md:border-white/30 shadow-sm w-full md:w-auto">
+                <label className="flex items-center gap-1.5 cursor-pointer text-[13px] font-bold text-gray-800 md:text-black/50 md:drop-shadow-md whitespace-nowrap">
+                  <input type="radio" name="tripType" value="roundTrip" checked={tripType === "roundTrip"} onChange={(e) => setTripType(e.target.value)} className="w-4 h-4 accent-[#ff6000]" />
+                  Round Trip
+                </label>
+                <label className="flex items-center gap-1.5 cursor-pointer text-[13px] font-semibold text-gray-600 md:text-black/50 hover:text-gray-900 md:hover:text-white transition-colors md:drop-shadow-md whitespace-nowrap">
+                  <input type="radio" name="tripType" value="oneWay" checked={tripType === "oneWay"} onChange={(e) => setTripType(e.target.value)} className="w-4 h-4 accent-[#ff6000]" />
+                  One Way
+                </label>
+                <label className="flex items-center gap-1.5 cursor-pointer text-[13px] font-semibold text-gray-600 md:text-black/50 hover:text-gray-900 md:hover:text-white transition-colors md:drop-shadow-md whitespace-nowrap">
+                  <input type="radio" name="tripType" value="multiCity" checked={tripType === "multiCity"} onChange={(e) => setTripType(e.target.value)} className="w-4 h-4 accent-[#ff6000]" />
+                  Multi-City
+                </label>
+              </div>
+            </div>
+
             {/* Input Fields Row */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 items-end gap-3 w-full">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-6 items-end gap-3 w-full">
               
               {/* From */}
-              <div className="flex flex-col gap-1.5 w-full">
-                <label className="text-sm font-semibold text-gray-800 ml-1">From</label>
+              <div className="flex flex-col gap-1.5 w-full col-span-1">
+                <label className="text-xs sm:text-sm font-semibold text-gray-800 ml-1">From</label>
                 <Popover open={isFromOpen} onOpenChange={setIsFromOpen}>
                   <PopoverTrigger asChild>
-                    <div className="w-full bg-white border border-gray-200 rounded-full px-4 py-3 hover:border-[#ff6000]/40 transition-colors cursor-pointer flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.02)]">
-                      <MapPin className={`h-4 w-4 mr-2 ${getIconColor()}`} />
-                      <span className="font-bold text-[14px] text-gray-800 uppercase truncate flex-1 text-left">{from}</span>
-                      <ChevronDown className="h-4 w-4 text-gray-400" />
+                    <div className="w-full bg-white border border-gray-200 rounded-2xl md:rounded-full px-3 sm:px-4 py-2.5 sm:py-3 hover:border-[#ff6000]/40 transition-colors cursor-pointer flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.02)]">
+                      <MapPin className={`h-4 w-4 mr-1.5 sm:mr-2 shrink-0 ${getIconColor()}`} />
+                      <span className="font-bold text-[13px] sm:text-[14px] text-gray-800 uppercase truncate flex-1 text-left">{from}</span>
+                      <ChevronDown className="h-4 w-4 text-gray-400 shrink-0 hidden sm:block" />
                     </div>
                   </PopoverTrigger>
                   <PopoverContent className="w-[300px] p-2" align="start">
@@ -170,14 +169,14 @@ export function WanderluxSearchWidget() {
               </div>
 
               {/* To */}
-              <div className="flex flex-col gap-1.5 w-full">
-                <label className="text-sm font-semibold text-gray-800 ml-1">To</label>
+              <div className="flex flex-col gap-1.5 w-full col-span-1">
+                <label className="text-xs sm:text-sm font-semibold text-gray-800 ml-1">To</label>
                 <Popover open={isToOpen} onOpenChange={setIsToOpen}>
                   <PopoverTrigger asChild>
-                    <div className="w-full bg-white border border-gray-200 rounded-full px-4 py-3 hover:border-[#ff6000]/40 transition-colors cursor-pointer flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.02)]">
-                      <MapPin className={`h-4 w-4 mr-2 ${getIconColor()}`} />
-                      <span className="font-bold text-[14px] text-gray-800 uppercase truncate flex-1 text-left">{to}</span>
-                      <ChevronDown className="h-4 w-4 text-gray-400" />
+                    <div className="w-full bg-white border border-gray-200 rounded-2xl md:rounded-full px-3 sm:px-4 py-2.5 sm:py-3 hover:border-[#ff6000]/40 transition-colors cursor-pointer flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.02)]">
+                      <MapPin className={`h-4 w-4 mr-1.5 sm:mr-2 shrink-0 ${getIconColor()}`} />
+                      <span className="font-bold text-[13px] sm:text-[14px] text-gray-800 uppercase truncate flex-1 text-left">{to}</span>
+                      <ChevronDown className="h-4 w-4 text-gray-400 shrink-0 hidden sm:block" />
                     </div>
                   </PopoverTrigger>
                   <PopoverContent className="w-[300px] p-2" align="start">
@@ -194,14 +193,14 @@ export function WanderluxSearchWidget() {
               </div>
 
               {/* Departure */}
-              <div className="flex flex-col gap-1.5 w-full">
-                <label className="text-sm font-semibold text-gray-800 ml-1">Departure</label>
+              <div className={`flex flex-col gap-1.5 w-full col-span-1 ${tripType === 'oneWay' ? 'lg:col-span-2' : ''}`}>
+                <label className="text-xs sm:text-sm font-semibold text-gray-800 ml-1">Departure</label>
                 <Popover>
                   <PopoverTrigger asChild>
-                    <div className="w-full bg-white border border-gray-200 rounded-full px-4 py-3 hover:border-[#ff6000]/40 transition-colors cursor-pointer flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.02)]">
-                      <CalendarIcon className={`h-4 w-4 mr-2 ${getIconColor()}`} />
-                      <span className="font-bold text-[14px] text-gray-800 truncate flex-1 text-left">{departure ? format(departure, "dd MMM yyyy") : "Select"}</span>
-                      <ChevronDown className="h-4 w-4 text-gray-400" />
+                    <div className="w-full bg-white border border-gray-200 rounded-2xl md:rounded-full px-3 sm:px-4 py-2.5 sm:py-3 hover:border-[#ff6000]/40 transition-colors cursor-pointer flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.02)]">
+                      <CalendarIcon className={`h-4 w-4 mr-1.5 sm:mr-2 shrink-0 ${getIconColor()}`} />
+                      <span className="font-bold text-[13px] sm:text-[14px] text-gray-800 truncate flex-1 text-left">{departure ? format(departure, "dd MMM") : "Select"}</span>
+                      <ChevronDown className="h-4 w-4 text-gray-400 shrink-0 hidden sm:block" />
                     </div>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-4" align="start">
@@ -211,31 +210,33 @@ export function WanderluxSearchWidget() {
               </div>
 
               {/* Return */}
-              <div className="flex flex-col gap-1.5 w-full" style={{ opacity: tripType === 'oneWay' ? 0.5 : 1 }}>
-                <label className="text-sm font-semibold text-gray-800 ml-1">Return</label>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <div className="w-full bg-white border border-gray-200 rounded-full px-4 py-3 hover:border-[#ff6000]/40 transition-colors cursor-pointer flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.02)]">
-                      <CalendarIcon className={`h-4 w-4 mr-2 ${getIconColor()}`} />
-                      <span className="font-bold text-[14px] text-gray-800 truncate flex-1 text-left">{tripType === 'oneWay' ? 'N/A' : returnDate ? format(returnDate, "dd MMM yyyy") : "Select"}</span>
-                      <ChevronDown className="h-4 w-4 text-gray-400" />
-                    </div>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-4" align="start">
-                    <Calendar mode="single" selected={returnDate} onSelect={setReturnDate} disabled={(date) => tripType === "oneWay" || date < new Date(new Date().setHours(0, 0, 0, 0)) || (!!departure && date < departure)} className="rounded-md border shadow-sm" />
-                  </PopoverContent>
-                </Popover>
-              </div>
+              {tripType !== 'oneWay' && (
+                <div className="flex flex-col gap-1.5 w-full col-span-1">
+                  <label className="text-xs sm:text-sm font-semibold text-gray-800 ml-1">Return</label>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <div className="w-full bg-white border border-gray-200 rounded-2xl md:rounded-full px-3 sm:px-4 py-2.5 sm:py-3 hover:border-[#ff6000]/40 transition-colors cursor-pointer flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.02)]">
+                        <CalendarIcon className={`h-4 w-4 mr-1.5 sm:mr-2 shrink-0 ${getIconColor()}`} />
+                        <span className="font-bold text-[13px] sm:text-[14px] text-gray-800 truncate flex-1 text-left">{returnDate ? format(returnDate, "dd MMM") : "Select"}</span>
+                        <ChevronDown className="h-4 w-4 text-gray-400 shrink-0 hidden sm:block" />
+                      </div>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-4" align="start">
+                      <Calendar mode="single" selected={returnDate} onSelect={setReturnDate} disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0)) || (!!departure && date < departure)} className="rounded-md border shadow-sm" />
+                    </PopoverContent>
+                  </Popover>
+                </div>
+              )}
 
               {/* Travelers */}
-              <div className="flex flex-col gap-1.5 w-full">
-                <label className="text-sm font-semibold text-gray-800 ml-1">Passengers</label>
+              <div className={`flex flex-col gap-1.5 w-full ${tripType === 'oneWay' ? 'col-span-1 lg:col-span-1' : 'col-span-2 md:col-span-1 lg:col-span-1'}`}>
+                <label className="text-xs sm:text-sm font-semibold text-gray-800 ml-1">Passengers</label>
                 <Popover open={isTravelersOpen} onOpenChange={setIsTravelersOpen}>
                   <PopoverTrigger asChild>
                     <div className="w-full bg-white border border-gray-200 rounded-full px-4 py-3 hover:border-[#ff6000]/40 transition-colors cursor-pointer flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.02)]">
-                      <Users className={`h-4 w-4 mr-2 ${getIconColor()}`} />
+                      <Users className={`h-4 w-4 mr-2 shrink-0 ${getIconColor()}`} />
                       <span className="font-bold text-[14px] text-gray-800 truncate flex-1 text-left">{passengers} Pax, {travelClass.split(" ")[0]}</span>
-                      <ChevronDown className="h-4 w-4 text-gray-400" />
+                      <ChevronDown className="h-4 w-4 text-gray-400 shrink-0" />
                     </div>
                   </PopoverTrigger>
                   <PopoverContent className="w-[300px] p-4" align="start">
@@ -263,7 +264,7 @@ export function WanderluxSearchWidget() {
               </div>
 
               {/* Search Button */}
-              <div className="w-full">
+              <div className="w-full col-span-2 md:col-span-1 lg:col-span-1">
                 <Button onClick={handleFlightSearch} className={`w-full rounded-full h-[46px] text-white text-[15px] font-bold tracking-wide transition-colors ${getButtonColor()}`}>
                   <Search className="h-4 w-4 mr-1.5" /> SEARCH
                 </Button>
@@ -274,17 +275,17 @@ export function WanderluxSearchWidget() {
 
         {/* ───────────────── HOTELS TAB ───────────────── */}
         <TabsContent value="hotels" className="mt-0 outline-none">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 items-end gap-3 w-full">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 items-end gap-3 w-full">
             
             {/* Destination */}
-            <div className="flex flex-col gap-1.5 w-full">
-              <label className="text-sm font-semibold text-gray-800 ml-1">Where to?</label>
+            <div className="flex flex-col gap-1.5 w-full col-span-2 lg:col-span-1">
+              <label className="text-xs sm:text-sm font-semibold text-gray-800 ml-1">Where to?</label>
               <Popover open={isHotelDestOpen} onOpenChange={setIsHotelDestOpen}>
                 <PopoverTrigger asChild>
-                  <div className="w-full bg-white border border-gray-200 rounded-full px-4 py-3 hover:border-amber-500/40 transition-colors cursor-pointer flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.02)]">
-                    <MapPin className={`h-4 w-4 mr-2 ${getIconColor()}`} />
-                    <span className="font-bold text-[14px] text-gray-800 uppercase truncate flex-1 text-left">{hotelDest}</span>
-                    <ChevronDown className="h-4 w-4 text-gray-400" />
+                  <div className="w-full bg-white border border-gray-200 rounded-2xl md:rounded-full px-3 sm:px-4 py-2.5 sm:py-3 hover:border-amber-500/40 transition-colors cursor-pointer flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.02)]">
+                    <MapPin className={`h-4 w-4 mr-1.5 sm:mr-2 shrink-0 ${getIconColor()}`} />
+                    <span className="font-bold text-[13px] sm:text-[14px] text-gray-800 uppercase truncate flex-1 text-left">{hotelDest}</span>
+                    <ChevronDown className="h-4 w-4 text-gray-400 shrink-0 hidden sm:block" />
                   </div>
                 </PopoverTrigger>
                 <PopoverContent className="w-[300px] p-2" align="start">
@@ -301,14 +302,14 @@ export function WanderluxSearchWidget() {
             </div>
 
             {/* Check In */}
-            <div className="flex flex-col gap-1.5 w-full">
-              <label className="text-sm font-semibold text-gray-800 ml-1">Check In</label>
+            <div className="flex flex-col gap-1.5 w-full col-span-1">
+              <label className="text-xs sm:text-sm font-semibold text-gray-800 ml-1">Check In</label>
               <Popover>
                 <PopoverTrigger asChild>
-                  <div className="w-full bg-white border border-gray-200 rounded-full px-4 py-3 hover:border-amber-500/40 transition-colors cursor-pointer flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.02)]">
-                    <CalendarIcon className={`h-4 w-4 mr-2 ${getIconColor()}`} />
-                    <span className="font-bold text-[14px] text-gray-800 truncate flex-1 text-left">{hotelCheckIn ? format(hotelCheckIn, "dd MMM yyyy") : "Select"}</span>
-                    <ChevronDown className="h-4 w-4 text-gray-400" />
+                  <div className="w-full bg-white border border-gray-200 rounded-2xl md:rounded-full px-3 sm:px-4 py-2.5 sm:py-3 hover:border-amber-500/40 transition-colors cursor-pointer flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.02)]">
+                    <CalendarIcon className={`h-4 w-4 mr-1.5 sm:mr-2 shrink-0 ${getIconColor()}`} />
+                    <span className="font-bold text-[13px] sm:text-[14px] text-gray-800 truncate flex-1 text-left">{hotelCheckIn ? format(hotelCheckIn, "dd MMM") : "Select"}</span>
+                    <ChevronDown className="h-4 w-4 text-gray-400 shrink-0 hidden sm:block" />
                   </div>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-4" align="start">
@@ -318,14 +319,14 @@ export function WanderluxSearchWidget() {
             </div>
 
             {/* Check Out */}
-            <div className="flex flex-col gap-1.5 w-full">
-              <label className="text-sm font-semibold text-gray-800 ml-1">Check Out</label>
+            <div className="flex flex-col gap-1.5 w-full col-span-1">
+              <label className="text-xs sm:text-sm font-semibold text-gray-800 ml-1">Check Out</label>
               <Popover>
                 <PopoverTrigger asChild>
-                  <div className="w-full bg-white border border-gray-200 rounded-full px-4 py-3 hover:border-amber-500/40 transition-colors cursor-pointer flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.02)]">
-                    <CalendarIcon className={`h-4 w-4 mr-2 ${getIconColor()}`} />
-                    <span className="font-bold text-[14px] text-gray-800 truncate flex-1 text-left">{hotelCheckOut ? format(hotelCheckOut, "dd MMM yyyy") : "Select"}</span>
-                    <ChevronDown className="h-4 w-4 text-gray-400" />
+                  <div className="w-full bg-white border border-gray-200 rounded-2xl md:rounded-full px-3 sm:px-4 py-2.5 sm:py-3 hover:border-amber-500/40 transition-colors cursor-pointer flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.02)]">
+                    <CalendarIcon className={`h-4 w-4 mr-1.5 sm:mr-2 shrink-0 ${getIconColor()}`} />
+                    <span className="font-bold text-[13px] sm:text-[14px] text-gray-800 truncate flex-1 text-left">{hotelCheckOut ? format(hotelCheckOut, "dd MMM") : "Select"}</span>
+                    <ChevronDown className="h-4 w-4 text-gray-400 shrink-0 hidden sm:block" />
                   </div>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-4" align="start">
@@ -335,14 +336,14 @@ export function WanderluxSearchWidget() {
             </div>
 
             {/* Guests */}
-            <div className="flex flex-col gap-1.5 w-full">
-              <label className="text-sm font-semibold text-gray-800 ml-1">Guests</label>
+            <div className="flex flex-col gap-1.5 w-full col-span-2 md:col-span-1 lg:col-span-1">
+              <label className="text-xs sm:text-sm font-semibold text-gray-800 ml-1">Guests</label>
               <Popover open={isHotelGuestsOpen} onOpenChange={setIsHotelGuestsOpen}>
                 <PopoverTrigger asChild>
                   <div className="w-full bg-white border border-gray-200 rounded-full px-4 py-3 hover:border-amber-500/40 transition-colors cursor-pointer flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.02)]">
-                    <Users className={`h-4 w-4 mr-2 ${getIconColor()}`} />
+                    <Users className={`h-4 w-4 mr-2 shrink-0 ${getIconColor()}`} />
                     <span className="font-bold text-[14px] text-gray-800 truncate flex-1 text-left">{hotelGuests} Guests, 1 Rm</span>
-                    <ChevronDown className="h-4 w-4 text-gray-400" />
+                    <ChevronDown className="h-4 w-4 text-gray-400 shrink-0" />
                   </div>
                 </PopoverTrigger>
                 <PopoverContent className="w-[300px] p-4" align="start">
@@ -357,7 +358,7 @@ export function WanderluxSearchWidget() {
             </div>
 
             {/* Search Button */}
-            <div className="w-full">
+            <div className="w-full col-span-2 md:col-span-1 lg:col-span-1">
               <Button onClick={handleHotelSearch} className={`w-full rounded-full h-[46px] text-white text-[15px] font-bold tracking-wide transition-colors ${getButtonColor()}`}>
                 <Search className="h-4 w-4 mr-1.5" /> SEARCH
               </Button>

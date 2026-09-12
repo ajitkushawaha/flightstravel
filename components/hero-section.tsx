@@ -206,24 +206,24 @@ export function HeroSection({ activeTab, setActiveTab }: HeroSectionProps) {
               <div className="bg-white p-4 sm:p-5 sm:pt-6 rounded-[24px] md:rounded-tl-none shadow-[0_16px_40px_-15px_rgba(0,0,0,0.2)] flex flex-col w-full">
 
                 {/* Trip Type Selector */}
-                <div className="flex items-center gap-6 mb-4 px-1">
-                  <label className="flex items-center gap-2 cursor-pointer text-[14px] font-bold text-gray-800">
-                    <input type="radio" name="tripType" value="roundTrip" checked={tripType === "roundTrip"} onChange={(e) => setTripType(e.target.value)} className="w-[18px] h-[18px] accent-[#1a73e8]" />
+                <div className="flex flex-wrap items-center gap-3 sm:gap-6 mb-4 px-1">
+                  <label className="flex items-center gap-2 cursor-pointer text-[13px] sm:text-[14px] font-bold text-gray-800 whitespace-nowrap">
+                    <input type="radio" name="tripType" value="roundTrip" checked={tripType === "roundTrip"} onChange={(e) => setTripType(e.target.value)} className="w-[16px] h-[16px] sm:w-[18px] sm:h-[18px] accent-[#1a73e8]" />
                     Round Trip
                   </label>
-                  <label className="flex items-center gap-2 cursor-pointer text-[14px] font-semibold text-gray-500 hover:text-gray-800 transition-colors">
-                    <input type="radio" name="tripType" value="oneWay" checked={tripType === "oneWay"} onChange={(e) => setTripType(e.target.value)} className="w-[18px] h-[18px] accent-[#1a73e8]" />
+                  <label className="flex items-center gap-2 cursor-pointer text-[13px] sm:text-[14px] font-semibold text-gray-500 hover:text-gray-800 transition-colors whitespace-nowrap">
+                    <input type="radio" name="tripType" value="oneWay" checked={tripType === "oneWay"} onChange={(e) => setTripType(e.target.value)} className="w-[16px] h-[16px] sm:w-[18px] sm:h-[18px] accent-[#1a73e8]" />
                     One Way
                   </label>
-                  <label className="flex items-center gap-2 cursor-pointer text-[14px] font-semibold text-gray-500 hover:text-gray-800 transition-colors">
-                    <input type="radio" name="tripType" value="multiCity" checked={tripType === "multiCity"} onChange={(e) => setTripType(e.target.value)} className="w-[18px] h-[18px] accent-[#1a73e8]" />
+                  <label className="flex items-center gap-2 cursor-pointer text-[13px] sm:text-[14px] font-semibold text-gray-500 hover:text-gray-800 transition-colors whitespace-nowrap">
+                    <input type="radio" name="tripType" value="multiCity" checked={tripType === "multiCity"} onChange={(e) => setTripType(e.target.value)} className="w-[16px] h-[16px] sm:w-[18px] sm:h-[18px] accent-[#1a73e8]" />
                     Multi-City
                   </label>
                 </div>
 
                 {/* Input Fields Row */}
-                <div className="flex flex-col md:flex-row items-center gap-3 w-full">
-                  <div className="flex flex-row w-full gap-3 lg:flex-[2]">
+                <div className="flex flex-col lg:flex-row items-center gap-3 w-full">
+                  <div className="flex flex-col sm:flex-row w-full gap-3 lg:flex-[2]">
                     {/* From Popover */}
                     <Popover open={isFromOpen} onOpenChange={setIsFromOpen}>
                       <PopoverTrigger asChild>

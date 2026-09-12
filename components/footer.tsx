@@ -11,10 +11,10 @@ export function Footer() {
   return (
     <footer className="bg-[#0a192f] text-white pt-20 pb-8">
       <div className="container max-w-[1200px] mx-auto px-4">
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
+        <div className="max-w-[1200px] mx-auto grid grid-cols-2 lg:grid-cols-12 gap-8 md:gap-12 mb-16">
           
           {/* Brand & About Column */}
-          <div className="lg:col-span-4 flex flex-col">
+          <div className="col-span-2 lg:col-span-4 flex flex-col">
             <div className="mb-6 bg-white p-3 w-fit rounded-lg shadow-sm">
               <Image src="/logo.png" alt="FlightsTravels Logo" width={200} height={50} />
             </div>
@@ -91,7 +91,7 @@ export function Footer() {
         </div>
 
         {/* Trust Badges */}
-        <div className="border-t border-white/10 pt-8 pb-4 flex flex-wrap justify-center items-center gap-6 opacity-80">
+        <div className="border-t border-white/10 pt-8 pb-4 flex flex-wrap justify-center items-center gap-4 sm:gap-6 opacity-80">
           <Image src="https://www.flightstravel.co.uk/assets/ficon/atol-protected.png" alt="ATOL Protected" width={120} height={50} className="object-contain" />
           <Image src="https://www.flightstravel.co.uk/assets/ficon/trustpilot-logo.png" alt="Trustpilot" width={120} height={50} className="object-contain" />
           <Image src="https://www.flightstravel.co.uk/assets/ficon/protected_payments.jpg" alt="Protected Payments" width={120} height={50} className="object-contain rounded" />
@@ -104,9 +104,9 @@ export function Footer() {
             <p>© 2025 FlightsTravels. {t.footer.allRightsReserved}.</p>
           </div>
           
-          <div className="flex items-center gap-4">
-            <span className="font-semibold text-white mr-2">Secure Payments:</span>
-            <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <span className="font-semibold text-white sm:mr-2">Secure Payments:</span>
+            <div className="flex flex-wrap justify-center gap-3">
               <Image src="https://www.flightstravel.co.uk/assets/img/payment-icons/visa-electron-curved-32px.png" alt="Visa" width={32} height={20} />
               <Image src="https://www.flightstravel.co.uk/assets/img/payment-icons/mastercard-curved-32px.png" alt="Mastercard" width={32} height={20} />
               <Image src="https://www.flightstravel.co.uk/assets/img/payment-icons/american-express-curved-32px.png" alt="Amex" width={32} height={20} />
